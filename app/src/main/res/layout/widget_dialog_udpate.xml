@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#4C000000">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_dialog_frame"
+        android:orientation="vertical"
+        tools:layout_marginEnd="24dp"
+        tools:layout_marginStart="24dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Sentence.Widget.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/sentence_dialog_app_update_title"
+            android:textColor="@color/sentence_text_main"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message"
+            style="@style/Sentence.Widget.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/sentence_text_main"
+            android:textSize="12dp"
+            tools:text="인접한 두 요소에 배경색만 조금 다르게 설정해 놓아도 구분이 충분히 될 수 있습니다.\n\n만약에 배경색을 이미 다르게 지정해 놓고도 border를 넣어놓았다면 border를 빼는 것이 좋습니다."
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_negative"
+                style="@style/Sentence.Widget.Button.Dialog.Negative"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sentence_button_later" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_positive"
+                style="@style/Sentence.Widget.Button.Dialog.Positive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sentence_button_update" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

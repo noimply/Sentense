@@ -1,0 +1,107 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Sentence" />
+    <!-- Base application theme. -->
+    <style name="Sentence.Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowContentTransitions">true</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="Sentence.Theme.LockScree" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/sentence_screen_background</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+
+    <style name="Sentence.Window">
+        <item name="android:background">@color/sentence_window_background</item>
+    </style>
+
+
+    <style name="Sentence.Widget">
+        <item name="android:fontFamily">@font/noimply_font</item>
+    </style>
+
+    <style name="Sentence.Widget.TextView">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Sentence.Widget.ImageView" />
+
+    <style name="Sentence.Widget.Switch">
+        <item name="android:stateListAnimator">@null</item>
+        <item name="colorControlActivated">@color/sentence_select_component_active</item>
+    </style>
+
+    <style name="Sentence.Widget.RadioButton">
+        <item name="android:stateListAnimator">@null</item>
+        <item name="colorControlActivated">@color/sentence_select_component_active</item>
+    </style>
+
+    <style name="Sentence.Widget.CheckBox">
+        <item name="android:stateListAnimator">@null</item>
+        <item name="colorControlActivated">@color/sentence_select_component_active</item>
+    </style>
+
+    <!-- region { dialog } -->
+    <style name="Sentence.Widget.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+    </style>
+    <!-- endregion -->
+
+    <!-- region { button view } -->
+    <style name="Sentence.Widget.Button">
+        <item name="android:textColor">@color/sentence_white</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="Sentence.Widget.Button.Dialog">
+        <item name="android:textColor">@color/sentence_white</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Sentence.Widget.Button.Dialog.Positive">
+        <item name="android:background">@drawable/ripple_button_dialog_positive</item>
+    </style>
+
+    <style name="Sentence.Widget.Button.Dialog.Negative">
+        <item name="android:background">@drawable/ripple_button_dialog_negative</item>
+    </style>
+
+    <style name="Sentence.Widget.Button.Dialog.Top" />
+
+    <style name="Sentence.Widget.Button.Dialog.Top.Positive">
+        <item name="android:background">@drawable/ripple_button_top_sheet_positive</item>
+    </style>
+
+    <style name="Sentence.Widget.Button.Dialog.Top.Negative">
+        <item name="android:background">@drawable/ripple_button_top_sheet_negative</item>
+    </style>
+    <!-- endregion -->
+</resources>

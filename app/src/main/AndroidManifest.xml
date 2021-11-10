@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.noimply.sentence">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".business.AppContext"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/sentence_app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Sentence.Theme">
+        <service
+            android:name=".business.service.SentenceService"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".business.receiver.SentenceReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ui.intro.IntroActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.permission.PermissionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.screen.ScreenActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:taskAffinity="net.noimply.scene.locker"
+            android:theme="@style/Sentence.Theme.LockScree" />
+
+        <activity
+            android:name=".ui.config.ConfigActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:taskAffinity="net.noimply.scene.locker"
+            android:theme="@style/Sentence.Theme.LockScree" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7629363633288746~2139533517" />
+
+        <meta-data
+            android:name="avatye_appid"
+            android:value="91e4b7f81a6511ea813d0a4916b2361a" />
+
+        <meta-data
+            android:name="avatye_appsecret"
+            android:value="aafc702323bf6a214" />
+
+        <meta-data
+            android:name="avatye_market"
+            android:value="googleplay" />
+
+        <meta-data
+            android:name="com.buzzvil.APP_KEY"
+            android:value="app-pub-150484850088628" />
+
+        <meta-data
+            android:name="avatye_log"
+            android:value="true" />
+
+    </application>
+
+</manifest>

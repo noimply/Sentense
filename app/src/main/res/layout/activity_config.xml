@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Sentence.Window"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- region { header } -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="10dp">
+
+
+        <!-- region { title } -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_title"
+            style="@style/Sentence.Widget.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/sentence_app_name"
+            android:textColor="@color/sentence_header_title"
+            android:textSize="20dp"
+            tools:text="$TITLE$" />
+        <!-- endregion -->
+
+
+        <!-- region { close } -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/header_close"
+            style="@style/Sentence.Widget.ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_close" />
+        <!-- endregion -->
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <View
+        android:id="@+id/header_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/sentence_line_common" />
+    <!-- endregion -->
+
+    <!-- region { content } -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <!-- region { 첫화면 설정 } -->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Sentence.Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center_vertical|start"
+                android:text="@string/sentence_setting_lockscreen_group"
+                android:textColor="@color/sentence_text_main"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/sentence_line_common" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/setting_lockscreen_active"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="@string/sentence_setting_lockscreen_active"
+                android:textColor="@color/sentence_text_main"
+                android:textSize="14dp"
+                android:theme="@style/Sentence.Widget.Switch" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/setting_lockscreen_vibrate"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="@string/sentence_setting_lockscreen_vibrate"
+                android:textColor="@color/sentence_text_main"
+                android:textSize="14dp"
+                android:theme="@style/Sentence.Widget.Switch" />
+            <!-- endregion -->
+
+
+            <!-- region { 날짜 표기 } -->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Sentence.Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center_vertical|start"
+                android:text="@string/sentence_setting_datetime_group"
+                android:textColor="@color/sentence_text_main"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/sentence_line_common" />
+
+            <RadioGroup
+                android:id="@+id/setting_datetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/setting_datetime_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layoutDirection="rtl"
+                    android:text="@string/sentence_setting_datetime_24"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="14dp"
+                    android:theme="@style/Sentence.Widget.RadioButton" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/setting_datetime_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layoutDirection="rtl"
+                    android:text="@string/sentence_setting_datetime_am_pm"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="14dp"
+                    android:theme="@style/Sentence.Widget.RadioButton" />
+
+            </RadioGroup>
+            <!-- endregion -->
+
+            <!-- region { etc } -->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Sentence.Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center_vertical|start"
+                android:text="@string/sentence_setting_etc_group"
+                android:textColor="@color/sentence_text_main"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/sentence_line_common" />
+
+            <RelativeLayout
+                android:id="@+id/setting_app_rating"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackground">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/sentence_setting_etc_app_rating"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/setting_suggest"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackground">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/sentence_setting_etc_app_suggest"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/setting_app_version"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackground">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/sentence_setting_etc_app_version"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="14dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/setting_app_version_name"
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/sentence_text_version_name"
+                    android:textSize="14dp"
+                    tools:text="1.0.0" />
+
+            </RelativeLayout>
+            <!-- endregion -->
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <!-- endregion -->
+
+    <!-- region { banner } -->
+    <FrameLayout
+        android:id="@+id/banner_frame"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        tools:background="#99ccff"
+        tools:visibility="visible" />
+    <!-- endregion -->
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="sentence_app_name">첫화면 영어</string>
+    <string name="sentence_app_developer_name">©NOIMPLY</string>
+    <string name="sentence_app_channel_name">첫화면 영어 알림창 상태바</string>
+    <!-- region { notification } -->
+    <string name="sentence_notification_content_title">첫화면 영어 서비스가 실행 중입니다</string>
+    <string name="sentence_notification_content_text">첫화면 영어 서비스와 함께 많은 추억을 확인하세요</string>
+    <!-- endregion -->
+    <string name="sentence_dialog_app_update_title">첫화면 영어 업데이트</string>
+    <string name="sentence_button_later">나중에 하기</string>
+    <string name="sentence_button_update">업데이트</string>
+    <string name="sentence_button_confirm">확인</string>
+    <string name="sentence_button_cancel">취소</string>
+    <string name="sentence_button_allow">허용</string>
+    <!-- region { permission } -->
+    <string name="sentence_permission_subject">편리한 서비스 이용을 위해\n다음 권한의 허용이 필요합니다.</string>
+    <string name="sentence_permission_can_draw_overlay_title">다른 앱 위에 그리기(선택)</string>
+    <string name="sentence_permission_can_draw_overlay_description"><![CDATA[<font color="#EC3D47">첫화면 영어</font>이 정상적으로 동작하기 위해서 다른 앱 위에 그리기 권한이 필요합니다.]]></string>
+    <string name="sentence_permission_can_draw_overlay_screen_message"><![CDATA[<font color="#EC3D47">첫화면 영어</font>이 정상적으로 동작하기 위해서 다른 앱 위에 그리기 권한을 허용해야 합니다\n허용하러 가시겠습니까?]]></string>
+    <string name="sentence_dialog_permission_overlay_message"><![CDATA[<font color="#EC3D47">첫화면 영어</font>이 정상적으로 동작하기 위해서 다른 앱 위에 그리기 권한을 허용해야 합니다<br/>허용하러 가시겠습니까?]]></string>
+    <string name="sentence_permission_deny_toast_message">권한 설정이 필요합니다.</string>
+    <string name="sentence_screen_slide_unlock">밀어서 잠금 해제</string>
+    <!-- endregion -->
+    <string name="sentence_screen_locker_main_text">홈 버튼을 사용할 수 없습니다</string>
+    <string name="sentence_screen_locker_sub_text">구글플레이 정책으로 인해, 잠금화면에서는 홈 버튼을 사용할 수 없습니다.잠금화면을 밀어서 해제하세요</string>
+    <string name="sentence_setting_lockscreen_group">첫화면 설정</string>
+    <string name="sentence_setting_lockscreen_active">첫화면 표시</string>
+    <string name="sentence_setting_lockscreen_vibrate">첫화면 진동</string>
+    <string name="sentence_setting_datetime_group">날짜</string>
+    <string name="sentence_setting_datetime_24">24시간</string>
+    <string name="sentence_setting_datetime_am_pm">오전/오후</string>
+    <string name="sentence_setting_etc_group">기타</string>
+    <string name="sentence_setting_etc_app_rating">평가하기/스토어 바로가기</string>
+    <string name="sentence_setting_etc_app_suggest">문의 및 개선사항</string>
+    <string name="sentence_setting_etc_app_version">앱 버전</string>
+    <string name="sentence_setting_etc_app_version_update">앱 버전(최신버전 업데이트)</string>
+    <string name="sentence_common_error">네크워크가 연결되어 있지 않거나 일시적인 오류가 발생하였습니다\n잠시 후 다시 시도해 주세요</string>
+</resources>

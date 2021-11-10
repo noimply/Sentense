@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.noimply.sentence.business.widget.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeBackLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sentence_screen_background"
+    tools:ignore="MissingPrefix">
+
+    <FrameLayout
+        android:id="@+id/screen_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/scene_null_001">
+
+        <!-- region { main content } -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- region { top content } -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/screen_menu_container"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/screen_time"
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="21:47"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="38dp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/screen_date"
+                        style="@style/Sentence.Widget.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2021.09.27"
+                        android:textColor="@color/sentence_text_main"
+                        android:textSize="12dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/screen_day"
+                        style="@style/Sentence.Widget.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sentence_text_main"
+                        android:textSize="12dp"
+                        tools:text="MONDAY" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/menu_config"
+                    style="@style/Sentence.Widget.ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_setting"
+                    android:tint="@color/sentence_text_main" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!-- endregion -->
+
+
+            <!-- region { sentence } -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/sentence_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_textsms_24" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sentence_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/sentence_white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    tools:text="Things will work out all right." />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sentence_korean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/sentence_white"
+                    android:textSize="16dp"
+                    tools:text="일이 잘 될 것입니다." />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!-- endregion -->
+
+
+            <!-- region { slider } -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_above="@+id/banner_frame"
+                android:background="#80333333"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableEnd="@drawable/ic_slide_arrow"
+                    android:gravity="center"
+                    android:text="@string/sentence_screen_slide_unlock"
+                    android:textColor="@color/sentence_white"
+                    android:textSize="14dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!-- endregion -->
+
+
+            <!-- region { banner } -->
+            <FrameLayout
+                android:id="@+id/banner_frame"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#80333333"
+                android:visibility="gone"
+                tools:background="#99ccff"
+                tools:visibility="visible" />
+            <!-- endregion -->
+
+
+        </RelativeLayout>
+        <!-- endregion -->
+
+        <!-- region { overlay-permission } -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/permission_overlay_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="24dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/permission_overlay_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7.5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_permission_overlay" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/permission_overlay_description"
+                    style="@style/Sentence.Widget.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_toEndOf="@+id/permission_overlay_icon"
+                    android:text="@string/sentence_permission_can_draw_overlay_screen_message"
+                    android:textColor="@color/sentence_text_main"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/permission_overlay_later"
+                    style="@style/Sentence.Widget.Button.Dialog.Top.Negative"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/sentence_button_later" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/permission_overlay_setting"
+                    style="@style/Sentence.Widget.Button.Dialog.Top.Positive"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/sentence_button_allow" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!-- endregion -->
+
+    </FrameLayout>
+
+</net.noimply.sentence.business.widget.SwipeBackLayout>
