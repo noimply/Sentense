@@ -36,6 +36,20 @@ android {
             buildConfigField "boolean", "X_BUILD_ALLOW_AD", "false"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file('../certificate/noimply_sentence_app_bundle.keystore')
+            storePassword 'rlatjsdn!@12'
+            keyAlias 'noimply-sentence'
+            keyPassword 'rlatjsdn!@12'
+        }
+        debug {
+            storeFile file('../certificate/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
