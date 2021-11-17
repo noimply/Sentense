@@ -107,7 +107,7 @@ class ConfigActivity : BaseScreenOverActivity() {
         // endregion
         // region { banner }
         // banner
-        if (SentenceSettings.executeCount > 100) {
+        if (SentenceSettings.executeCount > 10) {
             MobileAds.initialize(this) {
                 vb.bannerFrame.isVisible = true
                 vb.bannerFrame.addView(bannerView)

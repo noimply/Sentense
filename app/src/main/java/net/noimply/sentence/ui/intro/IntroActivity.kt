@@ -57,7 +57,7 @@ class IntroActivity : BaseActivity() {
 
     private fun checkExecuteCount() {
         Logger.info { "checkExecuteCount -> { execute-count: ${SentenceSettings.executeCount} }" }
-        if (SentenceSettings.executeCount > 100) {
+        if (SentenceSettings.executeCount > 10) {
             requestInterstitial()
         } else {
             SentenceSettings.executeCount++
