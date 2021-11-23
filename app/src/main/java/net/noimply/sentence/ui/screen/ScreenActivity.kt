@@ -130,13 +130,14 @@ class ScreenActivity : AppCompatActivity() {
         }
 
         // banner
-        if (SentenceSettings.executeCount > 10) {
+        if (SentenceSettings.executeCount > 20) {
             MobileAds.initialize(this) {
                 vb.bannerFrame.isVisible = true
                 vb.bannerFrame.addView(bannerView)
                 bannerView.loadAd(AdRequest.Builder().build())
             }
         } else {
+            SentenceSettings.executeCount++
             vb.bannerFrame.isVisible = false
         }
     }

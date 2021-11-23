@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.BuildConfig
+import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.business.support.Logger
 import net.noimply.sentence.business.support.SentenceSettings
 import net.noimply.sentence.business.support.permissionDrawOverlays
@@ -57,7 +57,7 @@ class IntroActivity : BaseActivity() {
 
     private fun checkExecuteCount() {
         Logger.info { "checkExecuteCount -> { execute-count: ${SentenceSettings.executeCount} }" }
-        if (SentenceSettings.executeCount > 10) {
+        if (SentenceSettings.executeCount > 20) {
             requestInterstitial()
         } else {
             SentenceSettings.executeCount++
