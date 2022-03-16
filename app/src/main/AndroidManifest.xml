@@ -52,7 +52,7 @@
             android:name=".ui.screen.ScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:showOnLockScreen="true"
@@ -69,30 +69,6 @@
             android:showOnLockScreen="true"
             android:taskAffinity="net.noimply.scene.locker"
             android:theme="@style/Sentence.Theme.LockScree" />
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7629363633288746~2139533517" />
-
-        <meta-data
-            android:name="avatye_appid"
-            android:value="91e4b7f81a6511ea813d0a4916b2361a" />
-
-        <meta-data
-            android:name="avatye_appsecret"
-            android:value="aafc702323bf6a214" />
-
-        <meta-data
-            android:name="avatye_market"
-            android:value="googleplay" />
-
-        <meta-data
-            android:name="com.buzzvil.APP_KEY"
-            android:value="app-pub-150484850088628" />
-
-        <meta-data
-            android:name="avatye_log"
-            android:value="true" />
 
     </application>
 

@@ -3,8 +3,8 @@
     <string name="sentence_app_developer_name">©NOIMPLY</string>
     <string name="sentence_app_channel_name">첫화면 영어 알림창 상태바</string>
     <!-- region { notification } -->
-    <string name="sentence_notification_content_title">첫화면 영어 서비스가 실행 중입니다</string>
-    <string name="sentence_notification_content_text">첫화면 영어 서비스와 함께 많은 추억을 확인하세요</string>
+    <string name="sentence_notification_content_title">첫화면 영어 서비스가 실행 중입니다.</string>
+    <string name="sentence_notification_content_text">첫화면에 새로운 문장이 표시됩니다.</string>
     <!-- endregion -->
     <string name="sentence_dialog_app_update_title">첫화면 영어 업데이트</string>
     <string name="sentence_button_later">나중에 하기</string>

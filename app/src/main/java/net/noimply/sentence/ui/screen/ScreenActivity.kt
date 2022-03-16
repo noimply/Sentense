@@ -1,6 +1,7 @@
 package net.noimply.sentence.ui.screen
 
 import android.annotation.SuppressLint
+import android.app.KeyguardManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -19,9 +20,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
-import com.google.android.gms.ads.*
-import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.R
+import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.business.model.DatetimeType
 import net.noimply.sentence.business.service.SentenceService
 import net.noimply.sentence.business.support.*
@@ -51,23 +51,6 @@ class ScreenActivity : AppCompatActivity() {
         }
     }
 
-    private val bannerView: AdView by lazy {
-        AdView(this).apply {
-            adSize = AdSize.BANNER
-            adUnitId = AppConstants.PlacementID.appCommonLinear
-            adListener = object : AdListener() {
-                override fun onAdFailedToLoad(p0: LoadAdError) {
-                    vb.bannerFrame.isVisible = false
-                }
-
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                    vb.bannerFrame.isVisible = true
-                }
-            }
-        }
-    }
-
     private val drawOverlayIntent: Intent by lazy {
         Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
     }
@@ -91,6 +74,29 @@ class ScreenActivity : AppCompatActivity() {
     }
 
     private val viewModel by viewModels<ScreenViewModel>()
+
+    private fun turnScreenOnAndKeyguardOff() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+            )
+        } else {
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED    // deprecated api 27
+                        or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD     // deprecated api 26
+                        or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON   // deprecated api 27
+                        or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+            )
+        }
+        val keyguardMgr = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            keyguardMgr.requestDismissKeyguard(this, null)
+        }
+    }
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,27 +124,15 @@ class ScreenActivity : AppCompatActivity() {
             ConfigActivity.open(this)
         }
         // view-model
-        viewModel.content.observe(this, {
+        viewModel.content.observe(this) {
             if (it is ResultViewModel.Complete) {
                 vb.sentenceEnglish.text = it.success.sentenceEnglish
                 vb.sentenceKorean.text = it.success.sentenceKorea
             }
-        })
+        }
 
         DialogManager.showNotice(activity = this@ScreenActivity) {
             DialogUpdateView.checkAndCreate(ownerActivity = this@ScreenActivity)?.show(cancelable = false)
-        }
-
-        // banner
-        if (SentenceSettings.executeCount > 20) {
-            MobileAds.initialize(this) {
-                vb.bannerFrame.isVisible = true
-                vb.bannerFrame.addView(bannerView)
-                bannerView.loadAd(AdRequest.Builder().build())
-            }
-        } else {
-            SentenceSettings.executeCount++
-            vb.bannerFrame.isVisible = false
         }
     }
 
@@ -237,6 +231,7 @@ class ScreenActivity : AppCompatActivity() {
     override fun onDestroy() {
         Logger.info { "$NAME -> onDestroy" }
         super.onDestroy()
+        //turnScreenOffAndKeyguardOn()
         try {
             unregisterReceiver(receiverLockScreen)
         } catch (e: java.lang.Exception) {

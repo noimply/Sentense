@@ -10,8 +10,8 @@ import android.os.IBinder
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import androidx.core.app.NotificationCompat
-import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.R
+import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.business.support.Logger
 import net.noimply.sentence.ui.intro.IntroActivity
 import net.noimply.sentence.ui.screen.ScreenActivity
@@ -31,6 +31,55 @@ class SentenceService : Service() {
             } else {
                 context.startService(Intent(context, SentenceService::class.java))
             }
+        }
+
+        fun showNotificationWithFullScreen(context: Context) {
+            val contentIntent = PendingIntent.getActivity(
+                context,
+                0,
+                Intent(context, IntroActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }, 0
+            )
+            val fullscreenIntent = PendingIntent.getActivity(
+                context,
+                0,
+                Intent(
+                    context,
+                    ScreenActivity::class.java
+                ).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                }, PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            val notification = makeNotification(context = context, contentIntent = contentIntent, fullscreenIntent = fullscreenIntent)
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(notificationId, notification)
+        }
+
+        private fun makeNotification(context: Context, contentIntent: PendingIntent? = null, fullscreenIntent: PendingIntent? = null): Notification {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+                (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
+                NotificationCompat.Builder(context, channelId)
+            } else {
+                NotificationCompat.Builder(context)
+            }.apply {
+                setOngoing(true)
+                setOnlyAlertOnce(true)
+                setAutoCancel(true)
+                setSmallIcon(R.mipmap.ic_launcher_round)
+                setContentTitle(context.getString(R.string.sentence_notification_content_title))
+                setContentText(context.getString(R.string.sentence_notification_content_text))
+                contentIntent?.let { setContentIntent(it) }
+                fullscreenIntent?.let {
+                    setLocalOnly(true)
+                    setCategory(NotificationCompat.CATEGORY_ALARM)
+                    setFullScreenIntent(it, true)
+                }
+            }.build()
         }
     }
 
@@ -74,30 +123,23 @@ class SentenceService : Service() {
 
     private fun registerNotification() {
         Logger.info { "$NAME -> registerNotification" }
-        val notificationCompatBuilder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(channel)
-            NotificationCompat.Builder(this, channelId)
-        } else {
-            NotificationCompat.Builder(this)
-        }.apply {
-            setOngoing(true)
-            setOnlyAlertOnce(true)
-            setSmallIcon(R.mipmap.ic_launcher_round)
-            setContentTitle(getString(R.string.sentence_notification_content_title))
-            setContentText(getString(R.string.sentence_notification_content_text))
-            setContentIntent(
-                PendingIntent.getActivity(
-                    this@SentenceService,
-                    0,
-                    Intent(this@SentenceService, IntroActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    },
-                    0
-                )
-            )
-        }.build()
+        val notificationCompatBuilder = makeNotification(
+            context = this@SentenceService,
+            contentIntent = makeContentIntent(),
+            fullscreenIntent = null
+        )
         startForeground(notificationId, notificationCompatBuilder)
+    }
+
+    private fun makeContentIntent(): PendingIntent {
+        return PendingIntent.getActivity(
+            this@SentenceService,
+            0,
+            Intent(this@SentenceService, IntroActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            },
+            0
+        )
     }
 
     private fun registerBroadcastReceiver() {
@@ -125,21 +167,22 @@ class SentenceService : Service() {
 
     private val lockScreenActionReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
+            val allowCanDrawOverlays = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Settings.canDrawOverlays(context)
+            } else {
+                true
+            }
+            Logger.info { "$NAME -> lockScreenActionReceiver { action: ACTION_SCREEN_ON -> canDrawOverlays: $allowCanDrawOverlays }" }
             when (intent?.action) {
                 Intent.ACTION_SCREEN_ON -> {
-                    // logging
-                    Logger.info {
-                        "$NAME -> lockScreenActionReceiver { action: ACTION_SCREEN_ON }"
-                    }
-                    context?.let { ctx ->
-                        val allowCanDrawOverlays = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            Settings.canDrawOverlays(context)
-                        } else {
-                            true
-                        }
-                        if (!allowCanDrawOverlays) {
-                            Logger.info {
-                                "$NAME -> lockScreenActionReceiver { action: ACTION_SCREEN_ON -> isCanDrawOverlays !!!! }"
+                    context?.let {
+                        Logger.info { "$NAME -> lockScreenActionReceiver { action: ACTION_SCREEN_ON }" }
+                        val callState = (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).callState
+                        if (callState == 0) {
+                            if (!allowCanDrawOverlays) {
+                                ScreenActivity.open(it)
+                                showNotificationWithFullScreen(context = it)
+                                Logger.info { "$NAME -> lockScreenActionReceiver -> showNotificationWithFullScreen" }
                             }
                         }
                     }
@@ -148,24 +191,18 @@ class SentenceService : Service() {
                     context?.let {
                         val callState = (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).callState
                         if (callState == 0) {
-                            ScreenActivity.open(it)
-                            // logging
-                            Logger.info {
-                                "$NAME -> lockScreenActionReceiver -> XceneLockerActivity -> start { action: ACTION_SCREEN_OFF, callState: idle }"
+                            if (allowCanDrawOverlays) {
+                                ScreenActivity.open(it)
+                                Logger.info { "$NAME -> lockScreenActionReceiver -> ScreenActivity -> Open" }
                             }
+                            Logger.info { "$NAME -> lockScreenActionReceiver -> XceneLockerActivity -> start { action: ACTION_SCREEN_OFF, callState: idle }" }
                         } else {
-                            // logging
-                            Logger.info {
-                                "$NAME -> lockScreenActionReceiver -> XceneLockerActivity -> start { action: ACTION_SCREEN_OFF, callState: $callState }"
-                            }
+                            Logger.info { "$NAME -> lockScreenActionReceiver -> XceneLockerActivity -> start { action: ACTION_SCREEN_OFF, callState: $callState }" }
                         }
                     }
                 }
                 Intent.ACTION_USER_PRESENT -> {
-                    // logging
-                    Logger.info {
-                        "$NAME -> lockScreenActionReceiver { action: ACTION_USER_PRESENT }"
-                    }
+                    Logger.info { "$NAME -> lockScreenActionReceiver { action: ACTION_USER_PRESENT }" }
                 }
             }
         }

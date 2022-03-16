@@ -12,9 +12,9 @@ android {
     defaultConfig {
         applicationId "net.noimply.sentence"
         minSdk 21
-        targetSdk 31
-        versionCode 2
-        versionName "1.0.1"
+        targetSdk 30
+        versionCode 3
+        versionName "1.0.2"
         // buildConfig
         buildConfigField "int", "X_BUILD_VERSION_CODE", "${String.valueOf(versionCode)}"
         buildConfigField "String", "X_BUILD_VERSION_NAME", "\"${String.valueOf(versionName)}\""
@@ -26,14 +26,12 @@ android {
         release {
             // buildConfig
             buildConfigField "boolean", "X_BUILD_ALLOW_LOG", "false"
-            buildConfigField "boolean", "X_BUILD_ALLOW_AD", "true"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             // buildConfig
             buildConfigField "boolean", "X_BUILD_ALLOW_LOG", "true"
-            buildConfigField "boolean", "X_BUILD_ALLOW_AD", "false"
         }
     }
     signingConfigs {
@@ -64,8 +62,8 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.activity:activity-ktx:1.4.0'
     // life-cycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
@@ -79,6 +77,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-config-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    // admob
-    implementation 'com.google.android.gms:play-services-ads:20.4.0'
 }

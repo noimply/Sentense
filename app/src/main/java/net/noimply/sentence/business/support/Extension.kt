@@ -1,6 +1,7 @@
 package net.noimply.sentence.business.support
 
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,7 @@ import android.text.Spanned
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.json.JSONArray
@@ -411,3 +413,34 @@ fun ContentResolver.registerObserver(uri: Uri, observer: (selfChange: Boolean) -
 }
 
 val Context.layoutInflater: LayoutInflater get() = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+
+fun Activity.turnScreenOnAndKeyguardOff() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+        setShowWhenLocked(true)
+        setTurnScreenOn(true)
+    } else {
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+        )
+    }
+
+    with(getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requestDismissKeyguard(this@turnScreenOnAndKeyguardOff, null)
+        }
+    }
+}
+
+fun Activity.turnScreenOffAndKeyguardOn() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+        setShowWhenLocked(false)
+        setTurnScreenOn(false)
+    } else {
+        window.clearFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+        )
+    }
+}

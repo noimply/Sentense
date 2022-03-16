@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignWithParentIfMissing="true"
-                android:layout_above="@+id/banner_frame"
+                android:layout_alignParentBottom="true"
                 android:background="#80333333"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -145,19 +145,6 @@
                     android:textSize="14dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-            <!-- endregion -->
-
-
-            <!-- region { banner } -->
-            <FrameLayout
-                android:id="@+id/banner_frame"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:background="#80333333"
-                android:visibility="gone"
-                tools:background="#99ccff"
-                tools:visibility="visible" />
             <!-- endregion -->
 
 

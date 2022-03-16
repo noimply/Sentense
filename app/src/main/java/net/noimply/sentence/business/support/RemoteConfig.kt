@@ -26,7 +26,7 @@ internal object RemoteConfig {
                     Logger.info { "remote-config -> fetchAndActivate: isSuccessful" }
                 } else {
                     callback(false)
-                    Logger.error { "remote-config -> fetchAndActivate: ${it}" }
+                    Logger.error { "remote-config -> fetchAndActivate: $it" }
                 }
             }
     }

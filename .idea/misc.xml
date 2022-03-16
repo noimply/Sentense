@@ -19,10 +19,10 @@
         <entry key="app/src/main/res/drawable/ripple_button_ec3d47.xml" value="0.7305555555555555" />
         <entry key="app/src/main/res/drawable/ripple_button_top_sheet_negative.xml" value="0.7305555555555555" />
         <entry key="app/src/main/res/font/alltv_font.xml" value="0.44907407407407407" />
-        <entry key="app/src/main/res/layout/activity_config.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_config.xml" value="0.647024504084014" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_permission.xml" value="0.6898148148148148" />
-        <entry key="app/src/main/res/layout/activity_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_screen.xml" value="0.22" />
         <entry key="app/src/main/res/layout/layout_screen_locker.xml" value="0.29339477726574503" />
         <entry key="app/src/main/res/layout/widget_dialog_overlay.xml" value="0.5885416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18055555555555555" />

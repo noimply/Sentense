@@ -8,9 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.isVisible
-import com.google.android.gms.ads.*
-import net.noimply.sentence.business.AppConstants
 import net.noimply.sentence.BuildConfig
 import net.noimply.sentence.R
 import net.noimply.sentence.business.model.DatetimeType
@@ -38,23 +35,6 @@ class ConfigActivity : BaseScreenOverActivity() {
     private val intentForMarket: Intent by lazy {
         Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(RemoteConfig.appVersionModel.marketUrl)
-        }
-    }
-
-    private val bannerView: AdView by lazy {
-        AdView(this).apply {
-            adSize = AdSize.BANNER
-            adUnitId = AppConstants.PlacementID.appCommonLinear
-            adListener = object : AdListener() {
-                override fun onAdFailedToLoad(p0: LoadAdError) {
-                    vb.bannerFrame.isVisible = false
-                }
-
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                    vb.bannerFrame.isVisible = true
-                }
-            }
         }
     }
 
@@ -103,18 +83,6 @@ class ConfigActivity : BaseScreenOverActivity() {
         vb.settingLockscreenVibrate.isChecked = SentenceSettings.allowVibrate
         vb.settingLockscreenVibrate.setOnCheckedChangeListener { _, isChecked ->
             SentenceSettings.allowVibrate = isChecked
-        }
-        // endregion
-        // region { banner }
-        // banner
-        if (SentenceSettings.executeCount > 10) {
-            MobileAds.initialize(this) {
-                vb.bannerFrame.isVisible = true
-                vb.bannerFrame.addView(bannerView)
-                bannerView.loadAd(AdRequest.Builder().build())
-            }
-        } else {
-            vb.bannerFrame.isVisible = false
         }
         // endregion
     }
